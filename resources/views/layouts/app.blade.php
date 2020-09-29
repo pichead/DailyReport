@@ -39,6 +39,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                            <li class="nav-item">
+                                <a href="{{asset('/createDailyReport')}}">สร้างรายงานประจำวัน</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{asset('/DailyReport')}}">ดูรายงานประจำวัน</a>
+                            </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

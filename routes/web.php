@@ -21,10 +21,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/createDailyReport', ['uses'=>'DailyReportController@create']);
+Route::post('/create', ['uses'=>'DailyReportController@store']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/DailyReport', ['uses'=>'DailyReportController@index']);
+Route::get('/Report', ['uses'=>'DailyReportController@report']);
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//insert data
+// Route::get('insert','StudInsertController@insertform');
+// Route::post('create','StudInsertController@insert');
