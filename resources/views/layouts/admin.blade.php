@@ -42,7 +42,7 @@
 <body>
 
 
-  @include('inc.navbarapp')
+  @include('inc.navbaradmin')
 
   @yield('content')
 

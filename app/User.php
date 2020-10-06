@@ -36,4 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const ADMIN_TYPE = 0;
+    const DEFAULT_TYPE = 1;
+    public function isAdmin(){
+        return $this->type === self::ADMIN_TYPE;
+    }
 }

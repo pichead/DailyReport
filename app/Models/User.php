@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -20,12 +21,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property bool $type
+ * 
+ * @property Collection|Report[] $reports
  *
  * @package App\Models
  */
 class User extends Model
 {
 	protected $table = 'users';
+
+	protected $casts = [
+		'type' => 'bool'
+	];
 
 	protected $dates = [
 		'email_verified_at'
@@ -41,6 +49,12 @@ class User extends Model
 		'email',
 		'email_verified_at',
 		'password',
-		'remember_token'
+		'remember_token',
+		'type'
 	];
+
+	public function reports()
+	{
+		return $this->hasMany(Report::class, 'name_id');
+	}
 }

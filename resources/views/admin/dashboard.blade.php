@@ -1,4 +1,4 @@
-@extends('layouts.web')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container mt-5">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are human!') }}
+                    {{ __('You are Superman!') }}
                 </div>
             </div>
         </div>
