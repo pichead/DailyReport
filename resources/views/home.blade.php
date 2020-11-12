@@ -15,9 +15,32 @@
                     @endif
 
                     {{ __('You are human!') }}
+                    
                 </div>
-            </div>
+
+
+                            <!-- <form action="{{asset('store')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                                <div class="form-row col-6">
+                                    <input type="file" id="file" name="file[]" class="form-control-file" multiple>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="form-control">
+                                </div>
+                            </form> -->
+
+
+
+            </div>  
         </div>
+        
     </div>
 </div>
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>
 @endsection

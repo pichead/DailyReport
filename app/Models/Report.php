@@ -13,10 +13,13 @@ use Illuminate\Database\Eloquent\Model;
  * Class Report
  * 
  * @property int $id
+ * @property Carbon $timestamp
  * @property int $name_id
+ * @property int $visible
  * @property string $Work_type
  * @property Carbon $WorkDate
- * @property string $Work1
+ * @property string|null $cm
+ * @property string|null $Work1
  * @property string|null $Work2
  * @property string|null $Work3
  * @property string|null $Work4
@@ -88,17 +91,22 @@ class Report extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'name_id' => 'int'
+		'name_id' => 'int',
+		'visible' => 'int'
 	];
 
 	protected $dates = [
+		'timestamp',
 		'WorkDate'
 	];
 
 	protected $fillable = [
+		'timestamp',
 		'name_id',
+		'visible',
 		'Work_type',
 		'WorkDate',
+		'cm',
 		'Work1',
 		'Work2',
 		'Work3',

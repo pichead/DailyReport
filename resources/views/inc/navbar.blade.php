@@ -1,13 +1,16 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand-sm  py-3 ">
+<nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-sm  py-3 ">
         <div class="container ">
             <a class="navbar-brand" href="{{asset('home')}}">PEC Daily Report</a>
             <button class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse" id="navbarNav" style="">
+            <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a  class="nav-link" href="{{asset('/ReportHistory').'/'.Auth::user()->id.'/'}}">ประวัติรายงาน</a>    
+                    <a  class="nav-link" href="{{asset('/Draft')}}">ฉบับร่างรายงาน</a>    
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="{{asset('/ReportHistory')}}">ประวัติรายงาน</a>    
                 </li>
                 <li class="nav-item">
                     <a  class="nav-link" href="{{asset('/createDailyReport')}}">สร้างรายงาน</a>
