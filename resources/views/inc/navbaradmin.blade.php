@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-sm  py-3 ">
+<nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-sm  py-3">
         <div class="container ">
             <a class="navbar-brand" href="{{asset('home')}}">PEC Daily Report</a>
             <button class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
@@ -7,7 +7,16 @@
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                      <a  class="nav-link" href="{{asset('/DailyReport')}}">ดูรายงาน</a>
+                      <a  class="nav-link" href="{{asset('/work')}}">มอบหมายงาน</a>
+                  </li>
+                  <li class="nav-item">
+                    <a  class="nav-link" href="{{asset('/Tag')}}">Tagรายงาน</a>
+                  </li>
+                  <li class="nav-item">
+                      <a  class="nav-link" href="{{asset('/DailyReport')}}">ค้นหารายงาน</a>
+                  </li>
+                  <li class="nav-item">
+                      <a  class="nav-link" href="{{asset('/resentReport')}}">รอการแก้ไขรายงาน</a>
                   </li>
 
                     @guest
@@ -43,4 +52,4 @@
         </div>
     </nav>
 <br>
-<br>
+

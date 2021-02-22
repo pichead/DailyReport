@@ -7,15 +7,21 @@
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a  class="nav-link" href="{{asset('/Draft')}}">ฉบับร่างรายงาน</a>    
+                    <a  class="nav-link" href="{{asset('/Draft')}}">ฉบับร่างรายงาน</a>
                 </li>
                 <li class="nav-item">
-                    <a  class="nav-link" href="{{asset('/ReportHistory')}}">ประวัติรายงาน</a>    
+                    <a  class="nav-link" href="{{asset('/ReportHistory')}}">ประวัติรายงาน</a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="{{asset('/Tag')}}">Tagรายงาน</a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="{{asset('/rejectReport')}}">ต้องการการแก้ไข</a>
                 </li>
                 <li class="nav-item">
                     <a  class="nav-link" href="{{asset('/createDailyReport')}}">สร้างรายงาน</a>
                 </li>
-                  
+
                     @guest
                         <li class="nav-item">
                             <a  class="nav-link navFont"  href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -48,5 +54,8 @@
             </div>
         </div>
     </nav>
+
+
+
 <br>
-<br>
+

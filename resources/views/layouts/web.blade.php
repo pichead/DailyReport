@@ -5,7 +5,7 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="{{ asset('other/favicon.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('others/favicon.png') }}">
 
   <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
@@ -32,7 +32,33 @@
       font-family: 'Prompt', sans-serif;
 
     }
-  </style>
+
+    textarea{
+    width: 500px;
+    min-height: 50px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #444;
+    padding: 5px;
+    }
+    .noscroll{
+      overflow: hidden;
+      resize: none;
+    }
+    .hiddendiv{
+      display: none;
+      white-space: pre-wrap;
+      width: 500px;
+      min-height: 50px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      padding: 5px;
+      word-wrap: break-word;
+    }
+    .lbr {
+      line-height: 3px;
+    }
+</style>
 
 </head>
 
@@ -45,12 +71,32 @@
 
 
 
-  @yield('script')
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ asset('others/chosen/chosen.jquery.js') }}"></script>
+
+  <script>
+  $(function(){
+      var textArea = $('#content'),
+      hiddenDiv = $(document.createElement('div')),
+      content = null;
+
+      textArea.addClass('noscroll');
+      hiddenDiv.addClass('hiddendiv');
+
+      $(textArea).after(hiddenDiv);
+
+      textArea.on('keyup', function(){
+          content = $(this).val();
+          content = content.replace(/\n/g, '<br>');
+          hiddenDiv.html(content + '<br class="lbr">');
+          $(this).css('height', hiddenDiv.height());
+      });
+  });
+  </script>
+  @yield('script')
 
 </body>
 

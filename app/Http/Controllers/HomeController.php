@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Report;
+use App\Models\User;
 use App\Models\ReportItemFile;
+use Auth;
 use DB;
 
+use App\Models\Tag;
+use App\Models\WorkAssignment;
+use App\Models\WorkReport;
 class HomeController extends Controller
 {
     /**
@@ -25,66 +31,34 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->isAdmin()) {
-            return view('admin/dashboard');
+
+        if(auth()->user()->type == 0) {
+          $pendingCount = Report::where('visible',2)->where('Work_status',"pending")->orderby('workDate','desc')->count();
+          $rejectCount = Report::where('visible',3)->where('Work_status',"reject")->orderby('workDate','desc')->count();
+          $sentCount = Report::where('visible',4)->where('Work_status',"resent")->orderby('workDate','desc')->count();
+          $reportCount = Report::where('visible',2)->orderby('workDate','desc')->count();
+          return view('admin.dashboard')->with('pendingCount',$pendingCount)->with('rejectCount',$rejectCount)->with('sentCount',$sentCount)->with('reportCount',$reportCount);
+          // return($pendingCount);
         } else {
-            return view('home');
+            $myid = Auth::user()->id;
+            $work_tags = WorkAssignment::where('user_id',$myid)->get();
+            $countdraft = Report::where('name_id',$myid)->where('visible',1)->orderby('workDate','desc')->count();
+            $countsent = Report::where('name_id',$myid)->where('visible',2)->orderby('workDate','desc')->count();
+            $countreject = Report::where('name_id',$myid)->where('visible',3)->orderby('workDate','desc')->count();
+            $countresent = Report::where('name_id',$myid)->where('visible',4)->orderby('workDate','desc')->count();
+
+            // return($count);
+            return view('home')->with('countdraft',$countdraft)
+                                ->with('countsent',$countsent)
+                                ->with('countreject',$countreject)
+                                ->with('countresent',$countresent)
+                                ->with('work_tags',$work_tags);
         }
     }
 
 
     public function store(Request $request)
     {
-        
-        try{
 
-            DB::beginTransaction();
-      
-                // $request=request();
-                if ($request->hasfile('file')){
-                    // return dd($request);
-                    return dd($request->file);
-                    foreach($request->file as $file){
-                        $filename = $file;
-                        return dd($file);
-                        $file->storeAs('public/upload',$filename);
-                        $report_itemFile = new ReportItemFile();
-                        $report_itemFile->name = $filename;
-                        $report_itemFile->save();
-                    }
-                    return redirect()->back() ->with('alert', 'upload สำเร็จ!');
-                }
-
-                // return ('nodata');
-                // $request=request();
-                // return dd($request);
-                // if($file = $request->file('file')){
-                //     // return dd($file);
-                //     foreach($file as $files){
-                //         return
-                //         $name = $files->getClientOriginalName();
-                //         if($files->move('file_upload',$name)){
-                //             $report_itemFile = new ReportItemFile();
-                //             $report_itemFile->name = $name();
-                //             $report_itemFile->save();
-                        
-                //             return redirect()->back() ->with('alert', 'upload สำเร็จ!');
-                //         };
-                //     }
-                // }
-                
-                
-                // // return dd($request);
-
-        
-            DB::commit();
-            return 1;
-        }
-        catch (\PDOException $e) {
-            // Woopsy
-            DB::rollBack();
-            // return $e;
-            return 0;
-      }
     }
 }

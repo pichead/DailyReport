@@ -7,13 +7,15 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Report
  * 
  * @property int $id
- * @property Carbon $timestamp
+ * @property Carbon $timeupdate
+ * @property Carbon|null $timestamp
  * @property int $name_id
  * @property int $visible
  * @property string $Work_type
@@ -82,6 +84,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $W15_ref
  * 
  * @property User $user
+ * @property Collection|Tag[] $tags
  *
  * @package App\Models
  */
@@ -96,11 +99,13 @@ class Report extends Model
 	];
 
 	protected $dates = [
+		'timeupdate',
 		'timestamp',
 		'WorkDate'
 	];
 
 	protected $fillable = [
+		'timeupdate',
 		'timestamp',
 		'name_id',
 		'visible',
@@ -173,5 +178,10 @@ class Report extends Model
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'name_id');
+	}
+
+	public function tags()
+	{
+		return $this->hasMany(Tag::class);
 	}
 }

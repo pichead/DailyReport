@@ -15,13 +15,14 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property string $name
+ * @property int $team
+ * @property bool $type
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property bool $type
  * 
  * @property Collection|Report[] $reports
  *
@@ -32,6 +33,7 @@ class User extends Model
 	protected $table = 'users';
 
 	protected $casts = [
+		'team' => 'int',
 		'type' => 'bool'
 	];
 
@@ -46,11 +48,12 @@ class User extends Model
 
 	protected $fillable = [
 		'name',
+		'team',
+		'type',
 		'email',
 		'email_verified_at',
 		'password',
-		'remember_token',
-		'type'
+		'remember_token'
 	];
 
 	public function reports()
